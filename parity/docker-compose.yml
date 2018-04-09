@@ -1,0 +1,23 @@
+version: '3'
+services: 
+  parity:
+    image: ivart/parity
+    network_mode: host
+    container_name: parity
+    volumes:
+      - paritydata:/paritydata
+    command: [  "parity",
+                "--ui-hosts=all",
+                "--ui-interface=192.168.99.100",
+                "--ws-interface=192.168.99.100",
+                "--ws-hosts=all",
+                "--ws-origins=all",
+                "--jsonrpc-hosts=all",
+                "--jsonrpc-interface=192.168.99.100",
+                "--jsonrpc-cors=*",
+                "--jsonrpc-apis=safe",
+                "--no-secretstore",
+                "--no-hardware-wallets" ]
+
+volumes:
+  paritydata:
