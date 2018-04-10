@@ -1,0 +1,22 @@
+FROM ubuntu
+MAINTAINER Artem Ivanov <ivart@ivart.xyz>
+
+WORKDIR /opt/parity
+RUN apt-get update && \
+	apt-get install -y \
+		git \
+		curl \
+		pkg-config \
+		openssl \
+		libssl-dev \
+		libudev-dev \
+		gcc \
+		g++ \
+		build-essential && \
+	git clone https://github.com/paritytech/parity . && \
+	git checkout stable
+RUN curl https://sh.rustup.rs -sSf > rust.sh && \
+	sh rust.sh -y
+ENV PATH=/root/.cargo/bin:$PATH
+RUN cargo update && cargo build --release
+RUN ln target/release/parity /usr/bin/parity 

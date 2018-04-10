@@ -7,6 +7,7 @@ services:
     volumes:
       - paritydata:/paritydata
     command: [  "parity",
+                "--force-ui",
                 "--ui-hosts=all",
                 "--ui-interface=192.168.99.100",
                 "--ws-interface=192.168.99.100",
@@ -17,7 +18,8 @@ services:
                 "--jsonrpc-cors=*",
                 "--jsonrpc-apis=safe",
                 "--no-secretstore",
-                "--no-hardware-wallets" ]
+                "--no-hardware-wallets",
+                "-d /paritydata"]
 
 volumes:
   paritydata:
